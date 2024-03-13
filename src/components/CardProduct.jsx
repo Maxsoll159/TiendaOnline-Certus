@@ -1,14 +1,15 @@
 import { useContext } from "react"
 import { ContextCart } from "../context/ContextCart"
+import { Link } from "react-router-dom"
 
 export const CardProduct = ({product}) => {
     const {addProductCart} = useContext(ContextCart)
 
-    const {title, price, category, image, rating} = product
+    const {id, title, price, category, image, rating} = product
 
     return (
         <article className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
-            <a href="#">
+            <Link to={`/product/${id}`}>
                 <div className="relative flex items-end overflow-hidden rounded-xl">
                     <img src={image} alt="Hotel Photo" className="w-full h-[200px]" />
                     <div className="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
@@ -36,7 +37,7 @@ export const CardProduct = ({product}) => {
                         </div>
                     </div>
                 </div>
-            </a>
+            </Link>
         </article>
     )
 }

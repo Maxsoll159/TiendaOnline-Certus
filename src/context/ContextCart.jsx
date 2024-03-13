@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import Swal from "sweetalert2";
 
 export const ContextCart = createContext()
 
@@ -10,6 +11,13 @@ export const ProviderContext = ({ children }) => {
     const addProductCart = (product) => {
         //SI EL PRODUCTO EXISTE O NO EXISTE DENTRO DE NUESTRO CARRUTO
         const existProduct = cartShopping.find((item) => item.id === product.id)
+
+        Swal.fire({
+            title: "Buen Trabajo",
+            text: "Producto Agregado Correctamente",
+            icon: "success"
+        });
+
         if (existProduct) {
             //CUANDO EL PRODUCTO EXISTE
             const newProduct = {
@@ -18,7 +26,7 @@ export const ProviderContext = ({ children }) => {
             }
             //BUSCAM,OS EL PRODUCTO EN EL CARRITO Y LO REEMPLAZAMOS CON SUS NUEVOS VALORES,
             //SI NO EXISTE DEVOLVEMOS EL CARRITO TAL CUAL
-            const updateCarrito = cartShopping.map((item)=>(
+            const updateCarrito = cartShopping.map((item) => (
                 item.id === existProduct.id ? newProduct : item
             ))
             setCartShopping(updateCarrito)
@@ -34,7 +42,7 @@ export const ProviderContext = ({ children }) => {
 
 
     return (
-        <ContextCart.Provider value={{addProductCart, cartShopping}}>
+        <ContextCart.Provider value={{ addProductCart, cartShopping }}>
             {children}
         </ContextCart.Provider>
     )
